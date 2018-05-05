@@ -1,6 +1,12 @@
-# docker-xmrig-amd
+# docker-xmrig-amd-vega
 
-Docker container for [xmrig-amd](https://github.com/xmrig/xmrig-amd) with AMD RX Vegas on Linux, including [AMDGPU-Unified Linux drivers](https://support.amd.com/en-us/kb-articles/Pages/Radeon-Software-for-Linux-Release-Notes.aspx), and donate level patch.
+Docker containers for [xmrig-amd](https://github.com/xmrig/xmrig-amd) with AMD RX Vegas on Linux, including various driver support, and donate level patch.
+
+## Tags
+
+ * `latest`, `18.10`
+ * `17.50`
+ * `17.40-blockchain`
 
 ## Requirements
 
@@ -14,23 +20,34 @@ Docker container for [xmrig-amd](https://github.com/xmrig/xmrig-amd) with AMD RX
 
 On you host, install the drivers with a command similar to (read the Dockerfile for the version of drivers you want to use):
 
-#### Examples
+#### Host Driver Installation
+
+Below are examples of flags used when installing drivers on your host system to work with these docker containers.
+
+##### 18.10
 
 ```
 ./amdgpu-pro-18.10-572953/amdgpu-pro-install -y --opencl=pal
 ```
 
-OR
+##### 17.50
 
 ```
 ./amdgpu-pro-17.50-552542/amdgpu-pro-install -y --opencl=rcom
+```
+
+##### 17.40-blockchain
+
+```
+./amdgpu-pro-17.40-483984/amdgpu-pro-install -y
+sudo apt install -y rocm-amdgpu-pro
 ```
 
 ## Usage
 
 ### First
 
-Pull the latest build:
+Pull the latest build with the driver tag that you've installed on your host (example):
 
 ```
 docker pull bananajamma/xmrig-amd-vega:18.10
@@ -49,7 +66,7 @@ docker run --device /dev/dri --device /dev/kfd --group-add=video -it --rm --name
 If you've clone this repo and made changes:
 
 ```
-docker build . --file 18.10.Dockerfile --tag bananajamma/xmrig-amd-vega:18.10
+docker build . --file 18.10.Dockerfile --tag bananajamma/xmrig-amd-vega:18.10 --tag bananajamma/xmrig-amd-vega:latest
 docker build . --file 17.50.Dockerfile --tag bananajamma/xmrig-amd-vega:17.50
 docker build . --file 17.40-blockchain.Dockerfile --tag bananajamma/xmrig-amd-vega:17.40-blockchain
 ```
