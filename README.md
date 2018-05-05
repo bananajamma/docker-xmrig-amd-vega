@@ -49,9 +49,9 @@ docker run --device /dev/dri --device /dev/kfd --group-add=video -it --rm --name
 If you've clone this repo and made changes:
 
 ```
-docker build . --file 18.10/Dockerfile --tag bananajamma/xmrig-amd-vega:18.10
-docker build . --file 17.50/Dockerfile --tag bananajamma/xmrig-amd-vega:17.50
-docker build . --file 17.40-blockchain/Dockerfile --tag bananajamma/xmrig-amd-vega:17.40-blockchain
+docker build . --file 18.10.Dockerfile --tag bananajamma/xmrig-amd-vega:18.10
+docker build . --file 17.50.Dockerfile --tag bananajamma/xmrig-amd-vega:17.50
+docker build . --file 17.40-blockchain.Dockerfile --tag bananajamma/xmrig-amd-vega:17.40-blockchain
 ```
 
 ## FAQ
