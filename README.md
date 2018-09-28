@@ -4,7 +4,9 @@ Docker containers for [xmrig-amd](https://github.com/xmrig/xmrig-amd) with AMD R
 
 ## Tags
 
- * `latest`, `18.10`
+ * `latest`, `18.30`
+ * `18.20`
+ * `18.10`
  * `17.50`
  * `17.40-blockchain`
 
@@ -14,6 +16,8 @@ Docker containers for [xmrig-amd](https://github.com/xmrig/xmrig-amd) with AMD R
 
 ### The matching drivers on your host (choose one)
 
+ * [AMDGPU-Unified Linux drivers 18.30](https://www.amd.com/en/support/kb/release-notes/rn-prorad-lin-18-30)
+ * [AMDGPU-Unified Linux drivers 18.20](https://support.amd.com/en-us/kb-articles/Pages/Radeon-Software-for-Linux-Release-Notes.aspx)
  * [AMDGPU-Unified Linux drivers 18.10](https://support.amd.com/en-us/kb-articles/Pages/Radeon-Software-for-Linux-Release-Notes.aspx)
  * [AMDGPU-Pro 17.50](https://www2.ati.com/drivers/linux/ubuntu/amdgpu-pro-17.50-552542.tar.xz)
  * [AMDGPU-Pro Beta Mining Driver 17.40](https://support.amd.com/en-us/kb-articles/Pages/AMDGPU-Pro-Beta-Mining-Driver-for-Linux-Release-Notes.aspx)
@@ -23,6 +27,18 @@ On you host, install the drivers with a command similar to (read the Dockerfile 
 #### Host Driver Installation
 
 Below are examples of flags used when installing drivers on your host system to work with these docker containers.
+
+##### 18.30
+
+```
+./amdgpu-pro-18.30-641594/amdgpu-pro-install -y --opencl=pal
+```
+
+##### 18.20 (these drivers have issues)
+
+```
+./amdgpu-pro-18.20-606296/amdgpu-pro-install -y --opencl=pal
+```
 
 ##### 18.10
 
@@ -36,7 +52,7 @@ Below are examples of flags used when installing drivers on your host system to 
 ./amdgpu-pro-17.50-552542/amdgpu-pro-install -y --opencl=rcom
 ```
 
-##### 17.40-blockchain
+##### 17.40-blockchain (these drivers perform well)
 
 ```
 ./amdgpu-pro-17.40-483984/amdgpu-pro-install -y
@@ -50,7 +66,7 @@ sudo apt install -y rocm-amdgpu-pro
 Pull the latest build with the driver tag that you've installed on your host (example):
 
 ```
-docker pull bananajamma/xmrig-amd-vega:18.10
+docker pull bananajamma/xmrig-amd-vega:latest
 ```
 
 ### Running
@@ -58,7 +74,7 @@ docker pull bananajamma/xmrig-amd-vega:18.10
 Example:
 
 ```
-docker run --device /dev/dri --device /dev/kfd --group-add=video -it --rm --name xmrig-amd-vega bananajamma/xmrig-amd-vega:18.10 --donate-level 0 -o gulf.moneroocean.stream:10032 -u 4JLN35ooAiU15BX6Rzi6DTWUKsdLALvf6Stx1uLLrYP28scYTAtyjhM3ULkrpCQMQ1BGvn2hSaYGtSzwtPcZhFSwdoFypnBsb6wKfhTGix -p x -k
+docker run --device /dev/dri --device /dev/kfd --group-add=video -it --rm --name xmrig-amd-vega bananajamma/xmrig-amd-vega:latest --donate-level 0 -o gulf.moneroocean.stream:10032 -u 4JLN35ooAiU15BX6Rzi6DTWUKsdLALvf6Stx1uLLrYP28scYTAtyjhM3ULkrpCQMQ1BGvn2hSaYGtSzwtPcZhFSwdoFypnBsb6wKfhTGix -p x -k
 ```
 
 ### Building
@@ -66,7 +82,9 @@ docker run --device /dev/dri --device /dev/kfd --group-add=video -it --rm --name
 If you've clone this repo and made changes:
 
 ```
-docker build . --file 18.10.Dockerfile --tag bananajamma/xmrig-amd-vega:18.10 --tag bananajamma/xmrig-amd-vega:latest
+docker build . --file 18.20.Dockerfile --tag bananajamma/xmrig-amd-vega:18.30 --tag bananajamma/xmrig-amd-vega:latest
+docker build . --file 18.20.Dockerfile --tag bananajamma/xmrig-amd-vega:18.20
+docker build . --file 18.10.Dockerfile --tag bananajamma/xmrig-amd-vega:18.10
 docker build . --file 17.50.Dockerfile --tag bananajamma/xmrig-amd-vega:17.50
 docker build . --file 17.40-blockchain.Dockerfile --tag bananajamma/xmrig-amd-vega:17.40-blockchain
 ```
