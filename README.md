@@ -22,7 +22,7 @@ Docker containers for [xmrig-amd](https://github.com/xmrig/xmrig-amd) with AMD R
  * [AMDGPU-Pro 17.50](https://www2.ati.com/drivers/linux/ubuntu/amdgpu-pro-17.50-552542.tar.xz)
  * [AMDGPU-Pro Beta Mining Driver 17.40](https://support.amd.com/en-us/kb-articles/Pages/AMDGPU-Pro-Beta-Mining-Driver-for-Linux-Release-Notes.aspx)
 
-On you host, install the drivers with a command similar to (read the Dockerfile for the version of drivers you want to use):
+On your host, install the drivers with a command similar to (read the Dockerfile for the version of drivers you want to use):
 
 #### Host Driver Installation
 
@@ -63,7 +63,7 @@ sudo apt install -y rocm-amdgpu-pro
 
 ### First
 
-Pull the latest build with the driver tag that you've installed on your host (example):
+Pull the latest build with the driver tag that you've installed on your host, for example:
 
 ```
 docker pull bananajamma/xmrig-amd-vega:latest
@@ -79,10 +79,10 @@ docker run --device /dev/dri --device /dev/kfd --group-add=video -it --rm --name
 
 ### Building
 
-If you've clone this repo and made changes:
+If you've cloned this repo and made changes:
 
 ```
-docker build . --file 18.20.Dockerfile --tag bananajamma/xmrig-amd-vega:18.30 --tag bananajamma/xmrig-amd-vega:latest
+docker build . --file 18.30.Dockerfile --tag bananajamma/xmrig-amd-vega:18.30 --tag bananajamma/xmrig-amd-vega:latest
 docker build . --file 18.20.Dockerfile --tag bananajamma/xmrig-amd-vega:18.20
 docker build . --file 18.10.Dockerfile --tag bananajamma/xmrig-amd-vega:18.10
 docker build . --file 17.50.Dockerfile --tag bananajamma/xmrig-amd-vega:17.50
